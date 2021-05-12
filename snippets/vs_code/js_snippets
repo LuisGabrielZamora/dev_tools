@@ -1,0 +1,110 @@
+{
+  "Estructura para rutas de breadcrumbs": {
+    "prefix": "routes-bread",
+    "body": [
+      "routes: [",
+      "   {",
+      "     name: 'home',",
+      "     breadcrumbName: 'Inicio',",
+      "     bIcon: 'house-fill',",
+      "   },",
+      "   {",
+      "     breadcrumbName: '$1',",
+      "     aIcon: '',",
+      "   },",
+      "],",
+    ],
+  },
+  "Estructura para formulario de recurso": {
+    "prefix": "form-obj",
+    "body": [
+      "resourceObj: {",
+      "  resourceType: '$1',",
+      "  form: {",
+      "    id: '',",
+      "  },",
+      "  relationships: [],",
+      "},",
+    ],
+  },
+  "Estructura objeto de tabla": {
+    "prefix": "table-obj",
+    "body": [
+      "tableObject: {",
+      "  data: [],",
+      "  pagination: {",
+      "    current: 1,",
+      "    pageSize: 15,",
+      "    from: 0,",
+      "    to: 0,",
+      "    total: 0,",
+      "    lastPage: 0,",
+      "        },",
+      "  loading: false,",
+      "  columns: [",
+      "    {",
+      "      title: 'Nombre',",
+      "      dataIndex: 'name',",
+      "      class: 'small text-center',",
+      "     // fixed: 'left',",
+      "      //width: '20%',",
+      "    },",
+      "    {",
+      "      title: 'Con scope',",
+      "      dataIndex: '',",
+      "      class: 'small text-center',",
+      "      scopedSlots: { customRender: 'scopeName'},",
+      "      //width: '20%',",
+      "    },",
+      "   {",
+      "     title: 'Acción',",
+      "     dataIndex: '',",
+      "     key: 'x',",
+      "     class: 'small text-center',",
+      "     scopedSlots: {customRender: 'action'},",
+      "     // fixed: 'right',",
+      "     // width: '20%',",
+      "    },",
+      "        ],",
+      "},",
+    ],
+  },
+  "Estructura para realizar fectch": {
+    "prefix": "api-fetch",
+    "body": [
+      "const params = {}",
+      "this.$1 = await this.GetResource('/$2', params)",
+    ],
+  },
+  "Estructura para realizar fectch de una tabla": {
+    "prefix": "api-fetch-table",
+    "body": [
+      "const params = {}",
+      "await this.GetTableResource(paginationEvent, '$1', this.$2, params)",
+    ],
+  },
+  "Estructura para realizar post": {
+    "prefix": "api-post",
+    "body": [
+      "await this.PostResource(this.$1, $2, $3)"
+    ],
+  },
+  "Estructura para realizar put": {
+    "prefix": "api-put",
+    "body": [
+      "await this.PutResource(this.$1, $2, $3)"
+    ],
+  },
+  "Estructura para realizar confirmar delete": {
+    "prefix": "api-ask-delete",
+    "body": [
+      "await this.deleteQuestion(this.$1.resourceType, this.$1.form.id, $2, $3)"
+    ],
+  },
+  "Estructura para realizar delete": {
+    "prefix": "api-delete",
+    "body": [
+      "await this.DeleteResource($1, $2, $3, $4)"
+    ],
+  }
+}

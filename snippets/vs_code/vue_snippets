@@ -1,0 +1,288 @@
+{
+  "Basic Responsive Button": {
+    "prefix": "res-btn",
+    "body": [
+      "<b-button pill variant=\"$1\" @click=\"$2\">",
+      " <div class=\"d-none d-$3-block\" v-b-tooltip.hover title=\"$4\">",
+      "   <b-icon icon=\"$5\"/> $4",
+      " </div>",
+      " <div class=\"d-$3-none\" v-b-tooltip.hover title=\"$4\">",
+      "   <b-icon icon=\"$5\"/>",
+      " </div>",
+      "</b-button>"
+    ],
+    "description": "Crea estructura de boton responsivo"
+  },
+
+  "Save Button": {
+    "prefix": "save-btn",
+    "body": [
+      "<b-button pill variant=\"primary\" @click=\"$1\">",
+      " <div class=\"d-none d-$2-block\" v-b-tooltip.hover title=\"Guardar\">",
+      "   <b-icon icon=\"archive\"/> Guardar",
+      " </div>",
+      " <div class=\"d-$2-none\" v-b-tooltip.hover title=\"Guardar\">",
+      "   <b-icon icon=\"archive\"/>",
+      " </div>",
+      "</b-button>"
+    ],
+    "description": "Crea estructura de boton de guardar"
+  },
+
+  "New Button": {
+    "prefix": "new-btn",
+    "body": [
+      "<b-button pill variant=\"primary\" @click=\"$1\">",
+      " <div class=\"d-none d-$2-block\" v-b-tooltip.hover title=\"Nuevo\">",
+      "   <b-icon icon=\"plus\"/> Nuevo",
+      " </div>",
+      " <div class=\"d-$2-none\" v-b-tooltip.hover title=\"Nuevo\">",
+      "   <b-icon icon=\"plus\"/>",
+      " </div>",
+      "</b-button>"
+    ],
+    "description": "Crea estructura de boton nuevo"
+  },
+  "Delete Button": {
+    "prefix": "del-btn",
+    "body": [
+      "<b-button pill variant=\"danger\" @click=\"$1\">",
+      " <div class=\"d-none d-$2-block\" v-b-tooltip.hover title=\"Eliminar\">",
+      "   <b-icon icon=\"trash\"/> Eliminar",
+      " </div>",
+      " <div class=\"d-$2-none\" v-b-tooltip.hover title=\"Eliminar\">",
+      "   <b-icon icon=\"trash\"/>",
+      " </div>",
+      "</b-button>"
+    ],
+    "description": "Crea estructura de boton eliminar"
+  },
+  "Edit Button": {
+    "prefix": "edit-btn",
+    "body": [
+      "<b-button pill variant=\"secondary\" @click=\"$1\">",
+      " <div class=\"d-none d-$2-block\" v-b-tooltip.hover title=\"Editar\">",
+      "   <b-icon icon=\"pencil-square\"/> Editar",
+      " </div>",
+      " <div class=\"d-$2-none\" v-b-tooltip.hover title=\"Editar\">",
+      "   <b-icon icon=\"pencil-square\"/>",
+      " </div>",
+      "</b-button>"
+    ],
+    "description": "Crea estructura de boton editar"
+  },
+  "Info Button": {
+    "prefix": "info-btn",
+    "body": [
+      "<b-button pill variant=\"info\" @click=\"$1\">",
+      " <div class=\"d-none d-$2-block\" v-b-tooltip.hover title=\"Información\">",
+      "   <b-icon icon=\"info-circle\"/> Información",
+      " </div>",
+      " <div class=\"d-$2-none\" v-b-tooltip.hover title=\"Información\">",
+      "   <b-icon icon=\"info-circle\"/>",
+      " </div>",
+      "</b-button>"
+    ],
+    "description": "Crea estructura de boton informacion"
+  },
+  "GoTo Button": {
+    "prefix": "goto-btn",
+    "body": [
+      "<b-button pill variant=\"default\" @click=\"$1\"> :to=\"$2\"",
+      " <div class=\"d-none d-$3-block\" v-b-tooltip.hover title=\"Ver Detalles\">",
+      "   <b-icon icon=\"arrow-right\"/> ",
+      " </div>",
+      " <div class=\"d-$3-none\" v-b-tooltip.hover title=\"Ver Detalles\">",
+      "   <b-icon icon=\"arrow-right\"/>",
+      " </div>",
+      "</b-button>"
+    ],
+    "description": "Crea estructura de boton ir"
+  },
+  "Clear Button": {
+    "prefix": "clear-btn",
+    "body": [
+      "<b-button size=\"sm\" variant=\"default\" @click=\"$1\">",
+      "   <b-icon icon=\"x\"/>",
+      "</b-button>"
+    ],
+    "description": "Crea estructura de boton limpiar"
+  },
+  "Search Button": {
+    "prefix": "search-btn",
+    "body": [
+      "<b-button size=\"sm\" variant=\"default\" @click=\"$1\">",
+      "   <b-icon icon=\"search\"/>",
+      "</b-button>"
+    ],
+    "description": "Crea estructura de boton buscar"
+  },
+  "Download Button": {
+    "prefix": "download-btn",
+    "body": [
+      "<b-button pill variant=\"info\" @click=\"$1\">",
+      " <div class=\"d-none d-$2-block\" v-b-tooltip.hover title=\"Descarga\">",
+      "   <b-icon icon=\"download\"/> Descarga",
+      " </div>",
+      " <div class=\"d-$2-none\" v-b-tooltip.hover title=\"Descarga\">",
+      "   <b-icon icon=\"download\"/>",
+      " </div>",
+      "</b-button>"
+    ],
+    "description": "Crea estructura de boton de Descarga"
+  },
+
+  "Return Button": {
+    "prefix": "return-btn",
+    "body": [
+      "<b-button pill variant=\"success\" @click=\"$1\">",
+      " <div class=\"d-none d-$2-block\" v-b-tooltip.hover title=\"Regresar\">",
+      "   <b-icon icon=\"arrow-left-circle\"/> Regresar",
+      " </div>",
+      " <div class=\"d-$2-none\" v-b-tooltip.hover title=\"Regresar\">",
+      "   <b-icon icon=\"arrow-left-circle\"/>",
+      " </div>",
+      "</b-button>"
+    ],
+    "description": "Crea estructura de boton de Return"
+  },
+  "Spinner": {
+    "prefix": "spinner",
+    "body": [
+      "<my-spinner :load=\"$1\"/>"
+    ],
+    "description": "Crea estructura de Spinner"
+  },
+  "breadcrumbs": {
+    "prefix": "bread",
+    "body": [
+      "<my-breadcrumbs :routes=\"$1\"/>"
+    ],
+    "description": "Crea estructura de breadcrumbs"
+  },
+  "newPage": {
+    "prefix": "new-page",
+    "body": [
+      "<template>",
+      " <div>",
+      "    <!--TITULOS  -->",
+      "    <div class=\"air__utils__heading\"> <h5>$1</h5> </div>",
+      "    <my-breadcrumbs :routes=\"$2\"/>",
+      "    <!--TITULOS  -->",
+      "    <!--BOTONERA  -->",
+      "    <b-button-group size=\"lg\">",
+      "    </b-button-group>",
+      "    <!--BOTONERA  -->",
+      "    <!--BARRA DE BUSQUEDA  -->",
+      "    <searchBar $3/>",
+      "    <!--BARRA DE BUSQUEDA  -->",
+      "    <!--TABLA-->",
+      "    <a-table :columns=\"$4.columns\"",
+      "        :data-source=\"$4.data\"",
+      "        :pagination=\"$4.pagination\"",
+      "        :loading=\"$4.loading\"",
+      "        @change=\"$5\"",
+      "        :row-key=\"record => record.id\">",
+      "    </a-table>",
+      "    <!--TABLA-->",
+      " </div>",
+      "</template>",
+      "</script>",
+      "import { fractalMixin } from '@/mixins/fractalMixin'",
+      "export default {",
+      "   name: '',",
+      "   mixins: [fractalMixin],",
+      "   data() {",
+      "   return {}",
+      "   },",
+      "   methods: {},",
+      "   async mounted() {},",
+      "}",
+      "</script>",
+      "<style scoped></style>",
+
+    ],
+  },
+  "AntDesign table": {
+    "prefix": "ant-table",
+    "body": [
+    "<!--TABLA-->",
+    "   <a-table bordered :scroll="{x:1300}" :columns=\"$1.columns\"",
+    "       :data-source=\"$1.data\"",
+    "       :pagination=\"$1.pagination\"",
+    "       :loading=\"$1.loading\"",
+    "       @change=\"$2\"",
+    "       :row-key=\"record => record.id\">",
+    "   </a-table>",
+    "<!--TABLA-->",
+    ],
+  },
+  "AntDesign datepicker": {
+    "prefix": "picker-date",
+    "body": [
+      "<!--DATEPICKER - $1-->",
+      "<a-form-model-item  label=\"$1\" ref=\"$2\" prop=\"$2\" >",
+      "  <a-date-picker  v-model=\"$3\" placeholder=\"$1\"",
+      "                  format=\"DD/MM/YYYY\" size=\"large\" valueFormat=\"YYYY/MM/DD\"/>",
+      "</a-form-model-item>",
+      "<!--DATEPICKER -$1 -->",
+    ],
+  },
+  "AntDesign select": {
+    "prefix": "ant-select",
+    "body": [
+      "<!--SELECT -$1 -->",
+      "<a-form-model-item label=\"$1\" ref=\"$2\" prop=\"$2\" >",
+      "  <a-select v-model=\"$3\"",
+      "            placeholder=\"$1\"",
+      "            show-search :filter-option=\"filterOption\">",
+      "    <a-select-option  v-for=\"option in $4\":key=\"option.id\":value=\"option.id\" >",
+      "      {{option.$5}}",
+      "    </a-select-option>",
+      "  </a-select>",
+      "</a-form-model-item>",
+      "<!--SELECT -$1 -->",
+    ],
+  },
+  "AntDesign text-area": {
+    "prefix": "ant-area",
+    "body": [
+      "<!--TEXT-AREA - $1-->",
+      "<a-form-model-item label=\"$1\" ref=\"$2\"  prop=\"$2\" >",
+      "  <a-textarea v-model.trim=\"$3\" auto-size :rows=\"5\"/>",
+      "</a-form-model-item>",
+      "<!--TEXT-AREA -$1 -->",
+    ],
+  },
+  "AntDesign text-input": {
+    "prefix": "ant-text",
+    "body": [
+      "<!--TEXT - $1-->",
+      "<a-form-model-item label=\"$1\" ref=\"$2\"  prop=\"$2\" >",
+      "   <a-input v-model.trim=\"$3\" placeholder=\"$1\" size=\"large\"/>",
+      "</a-form-model-item>",
+      "<!--TEXT -$1 -->",
+    ],
+  },
+  "AntDesign number-input": {
+    "prefix": "ant-number",
+    "body": [
+      "<!--NUMBER INPUT - $1-->",
+      "<a-form-model-item label=\"$1\" ref=\"$2\"  prop=\"$2\" >",
+      "   <a-input-number v-model.trim=\"$3\" :min=\"0\" :max=\"10\" :step=\"1\" size=\"large\"/>",
+      "</a-form-model-item>",
+      "<!--NUMBER INPUT -$1 -->",
+    ],
+  },
+  "AntDesign Form Model Structure": {
+    "prefix": "ant-form",
+    "body": [
+      "<!--FORMULARIO-->",
+      "<a-form-model :model=\"$1\":rules=\"$2\" ref=\"rule-Form\"",
+      "  layout=\"vertical\" :wrapper-col=\"{ span: 24}\">",
+      "</a-form-model>",
+      "<!--FORMULARIO-->",
+    ],
+  },
+
+}

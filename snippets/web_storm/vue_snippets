@@ -1,0 +1,280 @@
+Abbreviation: ant-table
+Applicable: HTML,Vue
+Template text:
+<!--TABLA-->
+  <a-table bordered :scroll="{x:1300}"
+      :columns="$TABLEOBJ$.columns"
+      :data-source="$TABLEOBJ$.data"
+      :pagination="$TABLEOBJ$.pagination"
+      :loading="$TABLEOBJ$.loading"
+      @change="$FETCHFUNCTION$"
+      :row-key="record => record.id">
+  </a-table>
+<!--TABLA-->
+
+**********************************************************************
+Abbreviation: res-btn,
+Applicable: HTML,Vue
+Template text:
+<b-button pill variant="$VARIANT$" @click="$CLICKfUNCTION$">
+    <div class="d-none d-$RESPONSIVE$-block" v-b-tooltip.hover title="$TEXT$">
+        <b-icon icon="$5"/> $TEXT$
+    </div>
+    <div class="d-$RESPONSIVE$-none" v-b-tooltip.hover title="$TEXT$">
+        <b-icon icon="$5"/>
+    </div>
+</b-button>
+**********************************************************************
+Abbreviation: save-btn,
+Applicable: HTML,Vue
+Template text:
+<b-button pill variant="$VARIANT$" @click="$CLICKfUNCTION$">
+    <div class="d-none d-$RESPONSIVE$-block" v-b-tooltip.hover title="$TEXT$">
+        <b-icon icon="$5"/> $TEXT$
+    </div>
+    <div class="d-$RESPONSIVE$-none" v-b-tooltip.hover title="$TEXT$">
+        <b-icon icon="$5"/>
+    </div>
+</b-button>
+**********************************************************************
+Abbreviation: new-btn,
+Applicable: HTML,Vue
+Template text:
+<b-button pill variant="primary" @click="$CLICKFUNCTION$">
+    <div class="d-none d-$RESPONSIVE$-block" v-b-tooltip.hover title="Nuevo">
+        <b-icon icon="plus"/> Nuevo
+    </div>
+    <div class="d-$RESPONSIVE$-none" v-b-tooltip.hover title="Nuevo">
+        <b-icon icon="plus"/>
+    </div>
+</b-button>
+**********************************************************************
+Abbreviation: del-btn,
+Applicable: HTML,Vue
+Template text:
+<b-button pill variant="danger" @click="$CLICKFUNCTION$">
+    <div class="d-none d-$RESPONSIVE$-block" v-b-tooltip.hover title="Eliminar">
+        <b-icon icon="trash"/> Eliminar
+    </div>
+    <div class="d-$RESPONSIVE$-none" v-b-tooltip.hover title="Eliminar">
+        <b-icon icon="trash"/>
+    </div>
+</b-button>
+**********************************************************************
+Abbreviation: edit-btn,
+Applicable: HTML,Vue
+Template text:
+<b-button pill variant="secondary" @click="$CLICKFUNCTION$">
+    <div class="d-none d-$RESPONSIVE$-block" v-b-tooltip.hover title="Editar">
+        <b-icon icon="pencil-square"/> Editar
+    </div>
+    <div class="d-$RESPONSIVE$-none" v-b-tooltip.hover title="Editar">
+        <b-icon icon="pencil-square"/>
+    </div>
+</b-button>
+**********************************************************************
+Abbreviation: info-btn,
+Applicable: HTML,Vue
+Template text:
+<b-button pill variant="info" @click="$CLICKFUNCTION$">
+    <div class="d-none d-$RESPONSIVE$-block" v-b-tooltip.hover title="Información">
+        <b-icon icon="info-circle"/> Información
+    </div>
+    <div class="d-$RESPONSIVE$-none" v-b-tooltip.hover title="Información">
+        <b-icon icon="info-circle"/>
+    </div>
+</b-button>
+**********************************************************************
+**********************************************************************
+Abbreviation: goto-btn,
+Applicable: HTML,Vue
+Template text:
+<b-button pill variant="default" @click="$CLICKFUNCTION$"> :to="$ROUTE$"
+    <div class="d-none d-$RESPONSIVE$-block" v-b-tooltip.hover title="Ver Detalles">
+        <b-icon icon="arrow-right"/>
+    </div>
+    <div class="d-$RESPONSIVE$-none" v-b-tooltip.hover title="Ver Detalles">
+        <b-icon icon="arrow-right"/>
+    </div>
+</b-button>
+**********************************************************************
+**********************************************************************
+Abbreviation: clear-btn,
+Applicable: HTML,Vue
+Template text:
+<b-button size="sm" variant="default" @click="$CLICKFUNCTION$">
+    <b-icon icon="x"/>
+</b-button>
+**********************************************************************
+**********************************************************************
+Abbreviation: search-btn,
+Applicable: HTML,Vue
+Template text:
+<b-button size="sm" variant="default" @click="$CLICKFUNCTION$">
+    <b-icon icon="search"/>
+</b-button>
+**********************************************************************
+**********************************************************************
+Abbreviation: download-btn,
+Applicable: HTML,Vue
+Template text:
+<b-button pill variant="info" @click="$CLICKFUNCTION$">
+    <div class="d-none d-$RESPONSIVE$-block" v-b-tooltip.hover title="Descarga">
+        <b-icon icon="download"/> Descarga
+    </div>
+    <div class="d-$RESPONSIVE$-none" v-b-tooltip.hover title="Descarga">
+        <b-icon icon="download"/>
+    </div>
+</b-button>
+**********************************************************************
+**********************************************************************
+Abbreviation: return-btn,
+Applicable: HTML,Vue
+Template text:
+<b-button pill variant="success" @click="$CLICKFUNCTION$">
+    <div class="d-none d-$RESPONSIVE$-block" v-b-tooltip.hover title="Regresar">
+        <b-icon icon="arrow-left-circle"/> Regresar
+    </div>
+    <div class="d-$RESPONSIVE$-none" v-b-tooltip.hover title="Regresar">
+        <b-icon icon="arrow-left-circle"/>
+    </div>
+</b-button>
+**********************************************************************
+**********************************************************************
+Abbreviation: spinner,
+Applicable: HTML,Vue
+Template text:
+<my-spinner :load="$LOAD$"/>
+******************************************************************
+Abbreviation: bread,
+Applicable: HTML,Vue
+Template text:
+<my-breadcrumbs :routes="$ROUTES$"/>
+********************************************************************************************************************************************
+Abbreviation: new-page,
+Applicable: HTML,Vue
+Template text:
+<template>
+    <div>
+        <!--TITULOS  -->
+        <div class="air__utils__heading"> <h5>$TITLE$</h5> </div>
+        <my-breadcrumbs :routes="$ROUTES$"/>
+        <!--TITULOS  -->
+        <!--BOTONERA  -->
+        <b-button-group size="lg">
+        </b-button-group>
+        <!--BOTONERA  -->
+        <!--BARRA DE BUSQUEDA  -->
+        <searchingBar :components="['filter', 'sort', 'pages']"
+              :sortByOptions="$SORTBYOPTIONS$"
+              @Fectch="$FETCHTABLE$"
+              @filterValue="filterValue = $event"
+              @sortValue="$TABLEOBJ$.sortValue = $event"
+              @pageSize="$TABLEOBJ$.pagination.pageSize = $event"
+              @currentPageValue="$TABLEOBJ$.currentPage = $event"/>
+        <!--BARRA DE BUSQUEDA  -->
+        <!--TABLA-->
+        <a-table :columns="$TABLEOBJ$.columns"
+            :data-source="$TABLEOBJ$.data"
+            :pagination="$TABLEOBJ$.pagination"
+            :loading="$TABLEOBJ$.loading"
+            @change="$FETCHTABLE$"
+            :row-key="record => record.id">
+        </a-table>
+        <!--TABLA-->
+    </div>
+</template>
+</script>
+import { fractalMixin } from '@/mixins/fractalMixin'
+export default {
+    name: '',
+    mixins: [fractalMixin],
+    data() {
+      return {
+      }
+    },
+    methods: {
+
+    },
+    async mounted() {},
+}
+</script>
+<style scoped></style>
+**********************************************************************
+**********************************************************************
+Abbreviation: ant-datepicker,
+Applicable: HTML,Vue
+Template text:
+<!--DATEPICKER - $LABEL$-->
+<a-form-model-item  label="$LABEL$" ref="$KEY$" prop="$KEY$" >
+    <a-date-picker  v-model="$FORMKEY$" placeholder="$LABEL$"
+                  format="DD/MM/YYYY" size="large" valueFormat="YYYY/MM/DD"/>
+</a-form-model-item>
+<!--DATEPICKER - $LABEL$ -->
+**********************************************************************
+**********************************************************************
+Abbreviation: ant-select,
+Applicable: HTML,Vue
+Template text:
+<!--SELECT -$LABEL$ -->
+<a-form-model-item label="$LABEL$" ref="$KEY$" prop="$KEY$" >
+    <a-select v-model="$KEYFORM$"
+                placeholder="$LABEL$"
+                show-search :filter-option="filterOption">
+        <a-select-option  v-for="option in $ARRAY$":key="option.id":value="option.id" >
+          {{option.$FIELD$}}
+        </a-select-option>
+    </a-select>
+</a-form-model-item>
+<!--SELECT -$LABEL$ -->
+**********************************************************************
+**********************************************************************
+Abbreviation: ant-datepicker,
+Applicable: HTML,Vue
+Template text:
+<!--TEXT-AREA - $LABEL$-->
+<a-form-model-item label="$LABEL$" ref="$KEY$"  prop="$KEY$" >
+    <a-textarea v-model.trim="$KEYFORM$" auto-size :rows="5"/>
+</a-form-model-item>
+<!--TEXT-AREA -$LABEL$ -->
+**********************************************************************
+**********************************************************************
+Abbreviation: text-area,
+Applicable: HTML,Vue
+Template text:
+<!--TEXT-AREA - $LABEL$-->
+<a-form-model-item label="$LABEL$" ref="$KEY$"  prop="$KEY$" >
+    <a-textarea v-model.trim="$KEYFORM$" auto-size :rows="5"/>
+</a-form-model-item>
+<!--TEXT-AREA -$LABEL$ -->
+**********************************************************************
+**********************************************************************
+Abbreviation: text-input,
+Applicable: HTML,Vue
+Template text:
+<!--TEXT - $LABEL$-->
+<a-form-model-item label="$LABEL$" ref="$KEY$"  prop="$KEY$" >
+    <a-input v-model.trim="$KEYFORM$" placeholder="$LABEL$" size="large"/>
+</a-form-model-item>
+<!--TEXT -$LABEL$ -->
+**********************************************************************
+**********************************************************************
+Abbreviation: number-input,
+Applicable: HTML,Vue
+Template text:
+<!--NUMBER INPUT - $LABEL$-->
+<a-form-model-item label="$LABEL$" ref="$KEY$"  prop="$KEY$" >
+    <a-input-number v-model.trim="$KEYFORM$" :min="0" :max="10" :step="1" size="large"/>
+</a-form-model-item>
+<!--NUMBER INPUT -$LABEL$ -->
+**********************************************************************
+**********************************************************************
+Abbreviation: ant-form,
+Applicable: HTML,Vue
+Template text:
+<!--FORMULARIO-->
+<a-form-model :model="$FORM$" :rules="$RULES$" ref="rule-Form"
+    layout="vertical" :wrapper-col="{ span: 24}">
+</a-form-model>
+<!--FORMULARIO-->
+**********************************************************************
