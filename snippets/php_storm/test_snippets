@@ -1,0 +1,356 @@
+/**   * @test     */
+public function guest_cannot_fetch_$RESOURCE$()
+{
+    $model = $MODEL$::factory()->count(2)->create();
+
+    $this->jsonApi()
+        ->get(route('api.v1.$RESOURCE$.index'))
+        ->assertStatusCode(401);
+}
+
+/**   * @test     */
+public function auth_user_can_fetch_all_$RESOURCE$()
+{
+    Sanctum::actingAs(User::factory()->create());
+    $model = $MODEL$::factory()->count(2)->create();
+
+    $this->jsonApi()
+        ->get(route('api.v1.$RESOURCE$.index'))
+        ->assertJson([
+            'data'=>  [
+                [
+                    'type' => '$RESOURCE$',
+                    'id' => (string) $model[0]->getRouteKey(),
+                    'attributes' => [
+                        'name'          => $model[0]->name,
+                        'code'         => $model[0]->code,
+                        'slug'           => $model[0]->slug,
+                    ],
+                    'links' => [
+                        'self' => route('api.v1.$RESOURCE$.read', $model [0])
+                    ]
+                ],
+                [
+                    'type' => '$RESOURCE$',
+                    'id' => (string) $model[1]->getRouteKey(),
+                    'attributes' => [
+                        'name'          => $model[1]->name,
+                        'code'         => $model[1]->code,
+                        'slug'           => $model[1]->slug,
+                    ],
+                    'links' => [
+                        'self' => route('api.v1.$RESOURCE$.read', $model[1])
+                    ]
+                ],
+            ]
+        ]);
+}
+
+/**   * @test     */
+public function auth_user_can_fetch_single_$RESOURCE$()
+{
+    Sanctum::actingAs(User::factory()->create());
+    $model = $MODEL$::factory()->create();
+
+    $this->jsonApi()
+        ->get(route('api.v1.$RESOURCE$.read',$model))
+        ->assertJsonFragment([
+            'attributes' => [
+                        'name' => $model->name,
+                        'code' => $model->code,
+                    ],
+        ]);
+}
+
+/**   * @test     */
+public function guest_cannot_fetch_$RESOURCE$()
+{
+    $model = $MODEL$::factory()->count(2)->create();
+
+    $this->jsonApi()
+        ->get(route('api.v1.$RESOURCE$.index'))
+        ->assertStatusCode(401);
+}
+
+/**   * @test     */
+public function auth_user_can_fetch_all_$RESOURCE$()
+{
+    Sanctum::actingAs(User::factory()->create());
+    $model = $MODEL$::factory()->count(2)->create();
+
+    $this->jsonApi()
+        ->get(route('api.v1.$RESOURCE$.index'))
+        ->assertJson([
+            'data'=>  [
+                [
+                    'type' => '$RESOURCE$',
+                    'id' => (string) $model[0]->getRouteKey(),
+                    'attributes' => [
+                        'name'          => $model[0]->name,
+                        'code'         => $model[0]->code,
+                        'slug'           => $model[0]->slug,
+                    ],
+                    'relationships' => [
+                        '$RELATION$' => [
+                            'links' => [
+                                'related' => route('api.v1.$RESOURCE$.relationships.$RELATION$', $model[0]),
+                                'self' => route('api.v1.$RESOURCE$.relationships.$RELATION$.read', $model[0])
+                            ]
+                        ]
+                    ],
+                    'links' => [
+                        'self' => route('api.v1.$RESOURCE$.read', $model [0])
+                    ]
+                ],
+                [
+                    'type' => '$RESOURCE$',
+                    'id' => (string) $model[1]->getRouteKey(),
+                    'attributes' => [
+                        'name'          => $model[1]->name,
+                        'code'         => $model[1]->code,
+                        'slug'           => $model[1]->slug,
+                    ],
+                    'relationships' => [
+                        '$RELATION$' => [
+                            'links' => [
+                                'related' => route('api.v1.$RESOURCE$.relationships.$RELATION$', $model[1]),
+                                'self' => route('api.v1.$RESOURCE$.relationships.$RELATION$.read', $model[1])
+                            ]
+                        ]
+                    ],
+                    'links' => [
+                        'self' => route('api.v1.$RESOURCE$.read', $model[1])
+                    ]
+                ],
+            ]
+        ]);
+}
+
+/**   * @test     */
+public function auth_user_can_fetch_single_$RESOURCE$()
+{
+    Sanctum::actingAs(User::factory()->create());
+    $model = $MODEL$::factory()->create();
+
+    $this->jsonApi()
+        ->get(route('api.v1.$RESOURCE$.read', $model))
+        ->assertJsonFragment([
+            'type' => '$RESOURCE$',
+            'id' => (string) $model->getRouteKey(),
+            'attributes' => [
+                'name' => $model->name,
+                'code' => $model->code,
+            ],
+            'relationships' => [
+                '$RELATION$' => [
+                    'links' => [
+                        'related' => route('api.v1.$RESOURCE$.relationships.$RELATION$', $model),
+                        'self' => route('api.v1.$RESOURCE$.relationships.$RELATION$.read', $model)
+                    ]
+                ]
+            ],
+            'links' => [
+                'self' => route('api.v1.$RESOURCE$.read', $model)
+            ]
+        ]);
+}
+
+/**   * @test     */
+public function can_filter_$RESOURCE$_by_$FILTER$()
+{
+    Sanctum::actingAs(User::factory()->create());
+    $MODEL$::factory()->create(['$FILTER$'=>'Argentina']);
+		$MODEL$::factory()->create(['$FILTER$'=>'Argelia']);
+    $MODEL$::factory()->create(['$FILTER$'=>'Noruega']);
+
+    $this->jsonApi()
+				->get(route('api.v1.$RESOURCE$.index',['filter[$FILTER$]'=>'rge']))
+        ->assertJsonCount(2,'data')
+        ->assertSee('Argentina')
+        ->assertSee('Argelia')
+				->assertDontSee('Noruega');
+}
+
+/**   * @test     */
+public function can_sort_$RESOURCE$_asc_by_$FIELD$()
+{
+    Sanctum::actingAs(User::factory()->create());
+    $MODEL$::factory()->create(['$FIELD$'=>'Argentina']);
+    $MODEL$::factory()->create(['$FIELD$'=>'Noruega']);
+    $MODEL$::factory()->create(['$FIELD$'=>'Belize']);
+
+    $this->jsonApi()
+					->get(route('api.v1.$RESOURCE$.index',['sort'=>'$FIELD$']))
+					->assertSeeInOrder([
+	            'Argentina',
+	            'Belize',
+	            'Noruega',
+		        ]);
+}
+
+/**   * @test     */
+public function can_sort_$RESOURCE$_desc_by_$FIELD$()
+{
+    Sanctum::actingAs(User::factory()->create());
+    $MODEL$::factory()->create(['$FIELD$'=>'Argentina']);
+    $MODEL$::factory()->create(['$FIELD$'=>'Noruega']);
+    $MODEL$::factory()->create(['$FIELD$'=>'Belize']);
+
+    $this->jsonApi()
+					->get(route('api.v1.$RESOURCE$.index',['sort'=>'-$FIELD$']))
+					->assertSeeInOrder([
+	            'Noruega',
+	            'Belize',
+	            'Argentina',
+		        ]);
+}
+
+/**   * @test     */
+public function cannot_filter_$RESOURCE$_by_unknown(){
+
+    Sanctum::actingAs(User::factory()->create());
+    $MODEL$::factory()->create(['name'=>'Argentina']);
+    $MODEL$::factory()->create(['name'=>'Noruega']);
+    $MODEL$::factory()->create(['name'=>'Belize']);
+
+    $this->jsonApi()
+				->get(route('api.v1.$RESOURCE$.index',['filter[unknown]'=>'Argentina']))
+        ->assertStatus(400);
+}
+
+/**   * @test     */
+public function can_search_$RESOURCE$_by_$FIELD1$_and_$FIELD2$()
+{
+		Sanctum::actingAs(User::factory()->create());
+    $MODEL$::factory()->create([
+        '$FIELD1$' => '$MODEL$ about Laravel',
+        '$FIELD2$'=>'Content'
+    ]);
+
+    $MODEL$::factory()->create([
+        '$FIELD1$' => 'Another $MODEL$',
+        '$FIELD2$'=>'Content Laravel'
+    ]);
+    $MODEL$::factory()->create([
+        '$FIELD1$' => 'Title 3',
+        '$FIELD2$'=>'Content 3'
+    ]);
+
+    $url = route('api.v1.$RESOURCE$.index',['filter[search]'=> 'Laravel']);
+
+    $this->jsonApi()->get($url)
+        ->assertJsonCount(2,'data')
+        ->assertSee('$MODEL$ about Laravel')
+        ->assertSee('Another $MODEL$')
+        ->assertDontSee('Title 3');
+}
+
+/**   * @test     */
+public function can_search_$RESOURCE$_by_$FIELD1$_and_$FIELD2$_with_multiple_terms()
+{
+		Sanctum::actingAs(User::factory()->create());
+    $MODEL$::factory()->create([
+        '$FIELD1$' => '$MODEL$ about Laravel',
+        '$FIELD2$'=>'Content'
+    ]);
+
+    $MODEL$::factory()->create([
+        '$FIELD1$' => 'Another $MODEL$',
+        '$FIELD2$'=>'Content Laravel'
+    ]);
+
+    $MODEL$::factory()->create([
+        '$FIELD1$' => 'New $MODEL$',
+        '$FIELD2$'=>'Content Lumen'
+    ]);
+    $MODEL$::factory()->create([
+        '$FIELD1$' => 'Title 3',
+        '$FIELD2$'=>'Content 3'
+    ]);
+
+    $url = route('api.v1.$RESOURCE$.index',['filter[search]'=> 'Laravel Lumen']);
+
+    $this->jsonApi()->get($url)
+        ->assertJsonCount(3,'data')
+        ->assertSee('$MODEL$ about Laravel')
+        ->assertSee('Another $MODEL$')
+        ->assertSee('New $MODEL$')
+        ->assertDontSee('Title 3');
+}
+
+
+// =========== EJEMPLO DE FILTRO GLOBAL ============
+/**   * @test     */
+public function can_filter_with_globalScope_with_multiple_terms(){
+    Sanctum::actingAs(User::factory()->create());
+
+            // Aceptados
+    $GLOBAL_MODEL$::factory()->create([
+        '$STRING_FIELD$' => '$DATAM1$',
+    ]);
+    $GLOBAL_MODEL$::factory()->create([
+        '$ID_1$' => $MODEL1$::factory()->create(['$FIELDM1$'=> '$DATAM2$']),
+    ]);
+    $GLOBAL_MODEL$::factory()->create([
+        '$ID_2$' =>  $MODEL2$::factory()->create(['$FIELDM2$'=>'$DATAM3$']),
+    ]);
+    $GLOBAL_MODEL$::factory()->create([
+        '$ID_3$' =>  $MODEL3$::factory()->create(['$FIELDM3$'=>'$DATAM4$']),
+    ]);
+    $GLOBAL_MODEL$::factory()->create([
+        '$ID_4$' =>  $MODEL4$::factory()->create(['$FIELDM4$'=>'$DATAM5$']),
+    ]);
+
+    // Rechazados
+    $GLOBAL_MODEL$::factory()->create([
+        '$STRING_FIELD$' => '$DATANOM1$',
+    ]);
+    $GLOBAL_MODEL$::factory()->create([
+        '$ID_1$' => $MODEL1$::factory()->create(['$FIELDM1$'=> '$DATANOM2$']),
+    ]);
+    $GLOBAL_MODEL$::factory()->create([
+        '$ID_2$' =>  $MODEL2$::factory()->create(['$FIELDM2$'=>'$DATANOM3$']),
+    ]);
+    $GLOBAL_MODEL$::factory()->create([
+        '$ID_3$' =>  $MODEL3$::factory()->create(['$FIELDM3$'=>'$DATANOM4$']),
+    ]);
+    $GLOBAL_MODEL$::factory()->create([
+        '$ID_4$' =>  $MODEL4$::factory()->create(['$FIELDM4$'=>'$DATANOM5$']),
+    ]);
+
+    $url = route('api.v1.$GLOBAL_MODEL$.index',['filter[global]'=> 'Laravel Roberto Contrato Entrada Venta']);
+    $this->jsonApi()->get($url)
+        ->assertJsonCount(5,'data')
+        ->assertSee('$DATAM1$')
+        ->assertSee('$DATAM2$')
+        ->assertSee('$DATAM3$')
+        ->assertSee('$DATAM4$')
+        ->assertSee('$DATAM5$')
+        ->assertDontSee('$DATANOM1$')
+        ->assertDontSee('$DATANOM2$')
+        ->assertDontSee('$DATANOM3$')
+        ->assertDontSee('$DATANOM4$')
+        ->assertDontSee('$DATANOM5$')
+    ;
+}
+
+/**   * @test     */
+public function guest_cannot_delete()
+{
+    $model=  $MODEL$::factory()->create();
+
+    $this->jsonApi()
+        ->delete(route('api.v1.$RESOURCE$.delete', $model))
+        ->assertStatus(401);
+}
+
+/**   * @test     */
+public function auth_can_delete()
+{
+    Sanctum::actingAs(User::factory()->create());
+    $model=  $MODEL$::factory()->create();
+
+    $this->jsonApi()
+				->delete(route('api.v1.$RESOURCE$.delete', $model))
+        ->assertStatus(204);
+}
