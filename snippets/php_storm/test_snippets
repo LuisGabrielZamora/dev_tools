@@ -1,3 +1,8 @@
+**********************************************************************
+Abbreviation: _ltest,
+Description: Create list test without relationships
+Applicable: PHP
+Template text:
 /**   * @test     */
 public function guest_cannot_fetch_$RESOURCE$()
 {
@@ -61,100 +66,13 @@ public function auth_user_can_fetch_single_$RESOURCE$()
                     ],
         ]);
 }
+**********************************************************************
 
-/**   * @test     */
-public function guest_cannot_fetch_$RESOURCE$()
-{
-    $model = $MODEL$::factory()->count(2)->create();
-
-    $this->jsonApi()
-        ->get(route('api.v1.$RESOURCE$.index'))
-        ->assertStatusCode(401);
-}
-
-/**   * @test     */
-public function auth_user_can_fetch_all_$RESOURCE$()
-{
-    Sanctum::actingAs(User::factory()->create());
-    $model = $MODEL$::factory()->count(2)->create();
-
-    $this->jsonApi()
-        ->get(route('api.v1.$RESOURCE$.index'))
-        ->assertJson([
-            'data'=>  [
-                [
-                    'type' => '$RESOURCE$',
-                    'id' => (string) $model[0]->getRouteKey(),
-                    'attributes' => [
-                        'name'          => $model[0]->name,
-                        'code'         => $model[0]->code,
-                        'slug'           => $model[0]->slug,
-                    ],
-                    'relationships' => [
-                        '$RELATION$' => [
-                            'links' => [
-                                'related' => route('api.v1.$RESOURCE$.relationships.$RELATION$', $model[0]),
-                                'self' => route('api.v1.$RESOURCE$.relationships.$RELATION$.read', $model[0])
-                            ]
-                        ]
-                    ],
-                    'links' => [
-                        'self' => route('api.v1.$RESOURCE$.read', $model [0])
-                    ]
-                ],
-                [
-                    'type' => '$RESOURCE$',
-                    'id' => (string) $model[1]->getRouteKey(),
-                    'attributes' => [
-                        'name'          => $model[1]->name,
-                        'code'         => $model[1]->code,
-                        'slug'           => $model[1]->slug,
-                    ],
-                    'relationships' => [
-                        '$RELATION$' => [
-                            'links' => [
-                                'related' => route('api.v1.$RESOURCE$.relationships.$RELATION$', $model[1]),
-                                'self' => route('api.v1.$RESOURCE$.relationships.$RELATION$.read', $model[1])
-                            ]
-                        ]
-                    ],
-                    'links' => [
-                        'self' => route('api.v1.$RESOURCE$.read', $model[1])
-                    ]
-                ],
-            ]
-        ]);
-}
-
-/**   * @test     */
-public function auth_user_can_fetch_single_$RESOURCE$()
-{
-    Sanctum::actingAs(User::factory()->create());
-    $model = $MODEL$::factory()->create();
-
-    $this->jsonApi()
-        ->get(route('api.v1.$RESOURCE$.read', $model))
-        ->assertJsonFragment([
-            'type' => '$RESOURCE$',
-            'id' => (string) $model->getRouteKey(),
-            'attributes' => [
-                'name' => $model->name,
-                'code' => $model->code,
-            ],
-            'relationships' => [
-                '$RELATION$' => [
-                    'links' => [
-                        'related' => route('api.v1.$RESOURCE$.relationships.$RELATION$', $model),
-                        'self' => route('api.v1.$RESOURCE$.relationships.$RELATION$.read', $model)
-                    ]
-                ]
-            ],
-            'links' => [
-                'self' => route('api.v1.$RESOURCE$.read', $model)
-            ]
-        ]);
-}
-
+**********************************************************************
+Abbreviation: _lftest,
+Description: Create list test with filter but without relations
+Applicable: PHP
+Template text:
 /**   * @test     */
 public function can_filter_$RESOURCE$_by_$FILTER$()
 {
@@ -278,13 +196,12 @@ public function can_search_$RESOURCE$_by_$FIELD1$_and_$FIELD2$_with_multiple_ter
         ->assertDontSee('Title 3');
 }
 
-
 // =========== EJEMPLO DE FILTRO GLOBAL ============
 /**   * @test     */
 public function can_filter_with_globalScope_with_multiple_terms(){
     Sanctum::actingAs(User::factory()->create());
 
-            // Aceptados
+    // Aceptados
     $GLOBAL_MODEL$::factory()->create([
         '$STRING_FIELD$' => '$DATAM1$',
     ]);
@@ -333,7 +250,112 @@ public function can_filter_with_globalScope_with_multiple_terms(){
         ->assertDontSee('$DATANOM5$')
     ;
 }
+**********************************************************************
 
+**********************************************************************
+Abbreviation: _lrtest,
+Description: Create list test with relationships
+Applicable: PHP
+Template text:
+/**   * @test     */
+public function guest_cannot_fetch_$RESOURCE$()
+{
+    $model = $MODEL$::factory()->count(2)->create();
+
+    $this->jsonApi()
+        ->get(route('api.v1.$RESOURCE$.index'))
+        ->assertStatusCode(401);
+}
+
+/**   * @test     */
+public function auth_user_can_fetch_all_$RESOURCE$()
+{
+    Sanctum::actingAs(User::factory()->create());
+    $model = $MODEL$::factory()->count(2)->create();
+
+    $this->jsonApi()
+        ->get(route('api.v1.$RESOURCE$.index'))
+        ->assertJson([
+            'data'=>  [
+                [
+                    'type' => '$RESOURCE$',
+                    'id' => (string) $model[0]->getRouteKey(),
+                    'attributes' => [
+                        'name'          => $model[0]->name,
+                        'code'         => $model[0]->code,
+                        'slug'           => $model[0]->slug,
+                    ],
+                    'relationships' => [
+                        '$RELATION$' => [
+                            'links' => [
+                                'related' => route('api.v1.$RESOURCE$.relationships.$RELATION$', $model[0]),
+                                'self' => route('api.v1.$RESOURCE$.relationships.$RELATION$.read', $model[0])
+                            ]
+                        ]
+                    ],
+                    'links' => [
+                        'self' => route('api.v1.$RESOURCE$.read', $model [0])
+                    ]
+                ],
+                [
+                    'type' => '$RESOURCE$',
+                    'id' => (string) $model[1]->getRouteKey(),
+                    'attributes' => [
+                        'name'          => $model[1]->name,
+                        'code'         => $model[1]->code,
+                        'slug'           => $model[1]->slug,
+                    ],
+                    'relationships' => [
+                        '$RELATION$' => [
+                            'links' => [
+                                'related' => route('api.v1.$RESOURCE$.relationships.$RELATION$', $model[1]),
+                                'self' => route('api.v1.$RESOURCE$.relationships.$RELATION$.read', $model[1])
+                            ]
+                        ]
+                    ],
+                    'links' => [
+                        'self' => route('api.v1.$RESOURCE$.read', $model[1])
+                    ]
+                ],
+            ]
+        ]);
+}
+
+/**   * @test     */
+public function auth_user_can_fetch_single_$RESOURCE$()
+{
+    Sanctum::actingAs(User::factory()->create());
+    $model = $MODEL$::factory()->create();
+
+    $this->jsonApi()
+        ->get(route('api.v1.$RESOURCE$.read', $model))
+        ->assertJsonFragment([
+            'type' => '$RESOURCE$',
+            'id' => (string) $model->getRouteKey(),
+            'attributes' => [
+                'name' => $model->name,
+                'code' => $model->code,
+            ],
+            'relationships' => [
+                '$RELATION$' => [
+                    'links' => [
+                        'related' => route('api.v1.$RESOURCE$.relationships.$RELATION$', $model),
+                        'self' => route('api.v1.$RESOURCE$.relationships.$RELATION$.read', $model)
+                    ]
+                ]
+            ],
+            'links' => [
+                'self' => route('api.v1.$RESOURCE$.read', $model)
+            ]
+        ]);
+}
+**********************************************************************
+
+**********************************************************************
+Abbreviation: _dtest,
+Description: Create delete test
+Applicable: PHP
+Template text:
 /**   * @test     */
 public function guest_cannot_delete()
 {
@@ -351,6 +373,6 @@ public function auth_can_delete()
     $model=  $MODEL$::factory()->create();
 
     $this->jsonApi()
-				->delete(route('api.v1.$RESOURCE$.delete', $model))
+		->delete(route('api.v1.$RESOURCE$.delete', $model))
         ->assertStatus(204);
 }
